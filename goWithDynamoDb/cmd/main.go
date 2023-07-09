@@ -6,8 +6,10 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
+	"github.com/yalinjob/goWithDynamoDb/goWithDynamoDb/pkg/handlers"
 )
 
 var (
@@ -29,11 +31,9 @@ func main() {
 const tableName = "go-serverless-yt"
 
 func handler(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-
-	switch req.HTTPMethid {
+	switch req.HTTPMethod {
 	case "GET":
 		return handlers.GetUser(req, tableName, dynaClient)
-
 	case "POST":
 		return handlers.CreateUser(req, tableName, dynaClient)
 	case "PUT":
@@ -42,7 +42,5 @@ func handler(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse
 		return handlers.DeleteUser(req, tableName, dynaClient)
 	default:
 		return handlers.UnhandledMethod()
-
 	}
-
 }
