@@ -1,4 +1,4 @@
-module 	github.com/yalinjob/goWithDynamoDb/goWithDynamoDb
+module 	github.com/yalinjob/goWithDynamoDb
 
 go 1.16
 
